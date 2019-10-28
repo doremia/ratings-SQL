@@ -23,9 +23,39 @@ class User(db.Model):
     age = db.Column(db.Integer, nullable=True)
     zipcode = db.Column(db.String(15), nullable=True)
 
+    def __repr__(self):
+        """Provide human readable information of the User object."""
+        return f"<User user_id={self.user_id} Email: {self.email}>"
+
 
 # Put your Movie and Rating model classes here.
+class Movie(db.Model):
+    """Movie of ratings website."""
 
+    __tablename__ = "movies"
+
+    movie_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    title = db.Column(db.String(64))
+    released_at=db.Column(db.DateTime)
+    imdb_url = db.Column(db.String(65))
+
+    def __repr__(self):
+        """Provide human readable information of the Movie object."""
+        return f"<Movie movie_id={self.movie_id} Title: {self.title}>"
+
+class Rating(db.Model):
+    """Rating of ratings website."""
+
+    __tablename__ = "ratings"
+
+    rating_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    movie_id = db.Column(db.Integer, db.ForeignKey('movies.movie_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    score = db.Column(db.Integer)
+
+    def __repr__(self):
+        """Provide human readable information of the Rating object."""
+        return f"<Rating rating_id={self.rating_id} Score: {self.score}>"
 
 ##############################################################################
 # Helper functions
