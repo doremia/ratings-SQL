@@ -35,9 +35,9 @@ class Movie(db.Model):
     __tablename__ = "movies"
 
     movie_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    title = db.Column(db.String(64))
+    title = db.Column(db.String(100))
     released_at=db.Column(db.DateTime)
-    imdb_url = db.Column(db.String(65))
+    imdb_url = db.Column(db.String(500))
 
     def __repr__(self):
         """Provide human readable information of the Movie object."""
