@@ -137,10 +137,21 @@ def set_rating():
 
     email = session['user']
     user = User.query.filter( User.email == email ).one()
+    rating = Rating.query.filter(Rating.user_id==user.user_id,
+                                 Rating.movie_id==movie_id).first()
+    if rating:
+        rating.score = score
+        flash('Score Updated')
+    else:
+        new_rating = Rating( movie_id = movie_id,
+                             score = score,
+                             user_id = user.user_id
+                            )   
+        db.session.add(new_rating)
+        flash('New Rating Made!')
 
-    #to be done: handle both the case where this is a new rating and 
-    #the case where this is updating an existing rating
-
+    db.session.commit()
+    
     return redirect(f'/movies/{movie_id}')
 
 
