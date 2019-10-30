@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+  <title>Ratings</title>
+</head>
+
+<body>
+  {% for message in get_flashed_messages() %}
+    <h2>******{{message}}******</h2>
+  {% endfor %}
+  
+  {% block content %} put your content here {% endblock %}
+
+</body>
+</html>

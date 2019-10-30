@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h2>Set or update a rating</h2>
+
+  <h2>Movie Info</h2>
+    
+  <b>Movie ID:</b> {{ movie.movie_id }} 
+  <br>     
+  <b>Movie Title:</b> {{ movie.title }} 
+  <br>
+  <b>Released at:</b> {{ movie.released_at }}
+  <br>
+  <b>IMDB:</b> {{ movie.imdb_url }}
+
+  <form action='/set-rating' method='post'>
+    <input type="hidden" name="movie_id" value="{{movie.movie_id}}">
+    Score (1-5): <input type="number" name="score">
+   <br>
+    <input type="submit">
+  </form>
+
+{% endblock %}

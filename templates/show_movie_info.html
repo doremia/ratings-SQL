@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <h2>Movie Info</h2>
+    
+  <b>Movie ID:</b> {{ movie.movie_id }} 
+  <br>     
+  <b>Movie Title:</b> {{ movie.title }} 
+  <br>
+  <b>Released at:</b> {{ movie.released_at }}
+  <br>
+  <b>IMDB:</b> {{ movie.imdb_url }}
+
+  <br><br>
+  <a href="/set-rating?movie_id={{movie.movie_id}}">Set or update a new rating</a>
+  <br>
+  
+  <h3> Here are the Movie's Ratings </h3>
+  <table>
+    <tr>
+      <td><b>User ID</b></td>
+      <td><b>Score</b></td>
+    </tr>
+  {% for rating in movie.ratings %}
+    <tr>
+      <td>{{ rating.user.user_id  }}</td>
+      <td>{{ rating.score }}</td>
+    </tr>
+  {% endfor %}
+  </table>
+
+{% endblock %}
