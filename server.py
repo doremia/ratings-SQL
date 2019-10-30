@@ -140,8 +140,12 @@ def set_rating():
     rating = Rating.query.filter(Rating.user_id==user.user_id,
                                  Rating.movie_id==movie_id).first()
     if rating:
-        rating.score = score
-        flash('Score Updated')
+        if score < 1 or score > 5:
+            flash('Score must be within 1 to 5')
+            return redirect(f'/set-rating?movie_id={movie_id}')
+        else:
+            rating.score = score
+            flash('Score Updated')
     else:
         new_rating = Rating( movie_id = movie_id,
                              score = score,
@@ -151,7 +155,7 @@ def set_rating():
         flash('New Rating Made!')
 
     db.session.commit()
-    
+
     return redirect(f'/movies/{movie_id}')
 
 
